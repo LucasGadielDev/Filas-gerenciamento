@@ -1,4 +1,4 @@
-# Treino RenderLab
+
 
 Sistema full-stack para cadastro e disparo assíncrono de campanhas de e-mail.
 
