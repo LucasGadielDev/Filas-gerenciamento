@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum CampaignStatus {
+  PENDING
+  PROCESSING
+  SENT
+  FAILED
+}
+
+model Campaign {
+  id             String         @id @default(cuid())
+  subject        String
+  message        String
+  recipientEmail String
+  idempotencyKey String
+  status         CampaignStatus @default(PENDING)
+  errorMessage   String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([createdAt])
+  @@index([idempotencyKey])
+}
